@@ -1,0 +1,46 @@
+# Pet, Category and Tags are entities/types created by us to represent our model.
+
+# Query and Mutation are the actions allowed by AppSync.
+
+# PaginatedPets is a type to represent our list of Pets in a paginated way.
+
+# CreatePetInput make a representation of a Pet type before be added to the database.
+
+# Pet is going to represent our domain
+type Pet {
+  id: ID!                # The ID type represents primary key.
+  category: Category     # The Category is a reference to the Category type below.
+  name: String!          # The "!" means this field is mandatory
+  photoUrls: [String]    # The brackets means an array
+  tags: [Tag]            # Same case as before, but using a custom type   
+  status: Boolean!       # Boolean type
+}
+
+type Category {
+    id: ID!
+    name: String!
+}
+
+type Tag {
+    id: ID!
+    name: String!
+}
+
+type PaginatedPets {
+  nextToken: String
+  items: [Pet]
+}
+
+type Query {
+  getPet(id: ID!): Pet
+  listPets(limit: Int, nextToken: String): PaginatedPets
+}
+
+input CreatePetInput {
+  name: String!
+  status: Boolean!
+}
+
+type Mutation {
+  createPet(input: CreatePetInput!): Pet
+}

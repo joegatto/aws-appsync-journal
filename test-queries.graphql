@@ -1,0 +1,28 @@
+query GetPet {
+  getPet(id: "104229dd-c27b-4998-b5aa-cdf74249a142") {
+    id
+    name
+    status
+  }
+}
+
+query ListPets {
+  listPets {
+    items {
+      id
+      name
+      status
+    }
+  }
+}
+
+mutation NewPetStore {
+  createPet(input: {
+    name: "Pet Store 1", 
+    status: true
+  }) {
+    id
+    name
+    status
+  }
+}
